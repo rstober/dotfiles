@@ -21,6 +21,7 @@ wget https://raw.githubusercontent.com/rstober/dotfiles/main/add-user.yaml .
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/run-yum-update.yaml .
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/clone-software-image.yaml .
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-gnome-desktop.yaml .
+wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-b4ds.yaml .
 
 # download playbooks
 
@@ -47,6 +48,7 @@ cp ansible.cfg /root/.ansible.cfg
 export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
 
 # install B4DS into cloned software image
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-b4ds.yaml
 
 # install gnome desktop in cloned software image
 ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-gnome-desktop.yaml
