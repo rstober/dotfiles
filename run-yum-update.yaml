@@ -7,5 +7,4 @@
       yum:
         name: '*'
         state: latest
-        exclude: python3-dnf
-        
+        exclude: python3-dnf        
