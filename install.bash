@@ -2,4 +2,10 @@
 
 echo "this is the install script"
 
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/cmshrc .
+installdir = /root/.road-runner
+
+if ! -d $installdir; then
+    mkdir -p /root/road-runner
+fi
+
+wget https://raw.githubusercontent.com/rstober/dotfiles/main/cmshrc $installdir
