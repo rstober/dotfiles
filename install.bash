@@ -1,4 +1,7 @@
-#!/usr/bin/env bash -xv
+#!/usr/bin/env bash
+
+set -x
+set -v
 
 echo "this is the install script"
 
