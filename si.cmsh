@@ -1,0 +1,3 @@
+device interfaces $1
+show $2
+goto -
