@@ -35,7 +35,8 @@ cp ansible.cfg /root/.ansible.cfg
 
 # ansible-galaxy collection install brightcomputing.bcm
 
-export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
+#export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
+export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
 
 ansible-playbook -ilocalhost, --flush-cache ${installdir}/run-yum-update.yaml
 
