@@ -8,5 +8,11 @@ if [ ! -d $installdir ]; then
     mkdir -p $installdir
 fi
 
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/cmshrc ${installdir}/.cmsh
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/bookmarks-cmsh ${installdir}/.bookmarks-cmsh
+cd $installdir
+
+wget https://raw.githubusercontent.com/rstober/dotfiles/main/cmshrc .
+wget https://raw.githubusercontent.com/rstober/dotfiles/main/bookmarks-cmsh .
+wget https://raw.githubusercontent.com/rstober/dotfiles/main/du.cmsh .
+wget https://raw.githubusercontent.com/rstober/dotfiles/main/si.cmsh .
+
+
