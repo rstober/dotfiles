@@ -18,6 +18,7 @@ wget https://raw.githubusercontent.com/rstober/dotfiles/main/du.cmsh .
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/si.cmsh .
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/ansible.cfg .
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/add-user.yaml .
+wget https://raw.githubusercontent.com/rstober/dotfiles/main/run-yum-date.yaml .
 
 # download playbooks
 
