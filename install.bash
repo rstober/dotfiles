@@ -15,4 +15,7 @@ wget https://raw.githubusercontent.com/rstober/dotfiles/main/bookmarks-cmsh .
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/du.cmsh .
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/si.cmsh .
 
-
+cp cmshrc /root/.cmshrc
+cp bookmarks-cmsh /root/.bookmarks-cmsh
+cp du.cmsh /root/.cm/cmsh/du.cmsh
+cp si.cmsh /root/.cm/cmsh/si.cmsh
