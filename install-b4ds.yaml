@@ -7,7 +7,6 @@
       yum:
         - name: cm-tensorflow2-py37-cuda10.2-gcc
         - name: cm-openmpi-geib-cuda10.2-gcc8
-        - name: cm-tensorflow2-extra-py37-cuda10.2-gcc8
-        state: present
+        state: latest
         update_cache: yes
         installroot: "/cm/images/cloned-image"
