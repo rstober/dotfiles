@@ -1,0 +1,13 @@
+---
+- hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Install B4DS packages
+      yum:
+        - name: cm-tensorflow2-py37-cuda10.2-gcc
+        - name: cm-openmpi-geib-cuda10.2-gcc8
+        - name: cm-tensorflow2-extra-py37-cuda10.2-gcc8
+        state: present
+        update_cache: yes
+        installroot: "/cm/images/cloned-image"
