@@ -6,5 +6,5 @@
     - name: create user
       brightcomputing.bcm.user:
         name: "{{ username }}"
-        password: "{{ passw }}"
+        password: "{{ pass }}"
         profile: "{{ prof }}"
