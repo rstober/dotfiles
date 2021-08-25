@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Install gnome desktop
+      yum:
+        name: '@workstation'
+        state: present
+        update_cache: yes
+        installroot: "/cm/images/cloned-image"
