@@ -4,8 +4,8 @@ echo "this is the install script"
 
 installdir=/root/.road-runner
 
-if ! -d $installdir; then
-    mkdir -p /root/.road-runner
+if [ ! -d $installdir ]; then
+    mkdir -p $installdir
 fi
 
 cd $installdir
