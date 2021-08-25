@@ -32,9 +32,9 @@ cp si.cmsh /root/.cm/cmsh/si.cmsh
 cp ansible.cfg /root/.ansible.cfg
 
 # install the brightcomputing.bcm collection
-module load python3
-pip install ansible-base
-ansible-galaxy collection install brightcomputing.bcm
+# module load python3
+# pip install ansible-base
+# ansible-galaxy collection install brightcomputing.bcm
 
 # must use the system python to use Ansible's built-in yum/dnf
 # export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
