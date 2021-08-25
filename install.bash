@@ -23,8 +23,10 @@ cp bookmarks-cmsh /root/.bookmarks-cmsh
 cp du.cmsh /root/.cm/cmsh/du.cmsh
 cp si.cmsh /root/.cm/cmsh/si.cmsh
 
-ansible-galaxy collection install brightcomputing.bcm
-
 module load python3
 
 pip install ansible-base
+
+export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
+
+ansible-galaxy collection install brightcomputing.bcm
