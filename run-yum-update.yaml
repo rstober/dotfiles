@@ -7,6 +7,11 @@
       yum:
         name: "*"
         state: latest
-        update_only: yes
         update_cache: yes
         
+    - name: Update default software image
+      yum:
+        name: "*"
+        installroot: "/cm/images/default-image"
+        state: latest
+        update_cache: yes
