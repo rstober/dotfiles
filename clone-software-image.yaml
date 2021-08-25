@@ -1,0 +1,9 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: clone a software image
+      brightcomputing.bcm.software_image:
+        name: cloned-image
+        cloneFrom: default-image
+        path: /cm/images/cloned-image
