@@ -7,4 +7,5 @@
       yum:
         name: '*'
         state: latest
-        exclude: python3-dnf        
+        update_only: yes
+        update_cache: yes
