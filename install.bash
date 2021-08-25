@@ -19,6 +19,7 @@ wget https://raw.githubusercontent.com/rstober/dotfiles/main/si.cmsh .
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/ansible.cfg .
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/add-user.yaml .
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/run-yum-update.yaml .
+wget https://raw.githubusercontent.com/rstober/dotfiles/main/clone-software-image.yaml .
 
 # download playbooks
 
@@ -39,6 +40,8 @@ cp ansible.cfg /root/.ansible.cfg
 export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
 
 ansible-playbook -ilocalhost, --flush-cache ${installdir}/run-yum-update.yaml
+
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-software-image.yaml
 
 # for user in robert david alice bob charlie edgar frank
 # do
