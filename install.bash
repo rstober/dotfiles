@@ -22,3 +22,9 @@ cp cmshrc /root/.cmshrc
 cp bookmarks-cmsh /root/.bookmarks-cmsh
 cp du.cmsh /root/.cm/cmsh/du.cmsh
 cp si.cmsh /root/.cm/cmsh/si.cmsh
+
+ansible-galaxy collection install brightcomputing.bcm
+
+module load python3
+
+pip install ansible-base
