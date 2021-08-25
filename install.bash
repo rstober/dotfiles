@@ -29,11 +29,13 @@ cp du.cmsh /root/.cm/cmsh/du.cmsh
 cp si.cmsh /root/.cm/cmsh/si.cmsh
 cp ansible.cfg /root/.ansible.cfg
 
-module load python3
+# module load python3
 
-pip install ansible-base
+# pip install ansible-base
 
-ansible-galaxy collection install brightcomputing.bcm
+# ansible-galaxy collection install brightcomputing.bcm
+
+export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
 
 ansible-playbook -ilocalhost, --flush-cache ${installdir}/run-yum-update.yaml
 
