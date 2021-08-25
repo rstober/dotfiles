@@ -1,0 +1,10 @@
+---
+- hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: create user
+      brightcomputing.bcm.user:
+        name: robert
+        password: 6b3rl1n5
+        profile: cloudjob
