@@ -8,3 +8,4 @@
         name: '*'
         state: latest
         exclude: python3-dnf
+        
