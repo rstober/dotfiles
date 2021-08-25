@@ -1,0 +1,7 @@
+alias ll list
+alias dl device list
+alias bm bookmark
+alias ss goto ss
+alias dt goto dt
+alias ms goto ms
+bookmark -x /root/.bookmarks-cmsh
