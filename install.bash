@@ -9,6 +9,7 @@ if [ ! -d $installdir ]; then
 fi
 
 cd $installdir
+rm *
 
 # download dot files
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/cmshrc .
@@ -33,5 +34,7 @@ pip install ansible-base
 
 ansible-galaxy collection install brightcomputing.bcm
 
-
-ansible-playbook -ilocalhost, --flush-cache --extra-vars "username=robert pass=6b3rl1n5 prof=cloudjob" ${installdir}/add-user.yaml
+for user in robert david
+do
+    ansible-playbook -ilocalhost, --flush-cache --extra-vars "username=$user pass=6b3rl1n5 prof=cloudjob" ${installdir}/add-user.yaml
+done
