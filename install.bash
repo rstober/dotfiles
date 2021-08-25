@@ -33,4 +33,5 @@ pip install ansible-base
 
 ansible-galaxy collection install brightcomputing.bcm
 
-ansible-playbook -ilocalhost, ${installdir}/add-user.yaml
+
+ansible-playbook -ilocalhost, --extra-vars "user=robert password=6b3rl1n5 profile=cloudjob" ${installdir}/add-user.yaml
