@@ -42,8 +42,8 @@ cp ansible.cfg /root/.ansible.cfg
 # ansible-playbook -ilocalhost, --flush-cache ${installdir}/run-yum-update.yaml
 
 # must use the Bright python package to intercat with cm-python3 intereter for the Bright collection
-# export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
-# ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-software-image.yaml
+export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-software-image.yaml
 
 export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
 
