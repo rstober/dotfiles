@@ -9,5 +9,6 @@
         
     - name: set cloned category software image -> cloned-image
       brightcomputing.bcm.category:
+        name: cloned
         softwareImageProxy: 
           parentSoftwareImage: cloned-image
