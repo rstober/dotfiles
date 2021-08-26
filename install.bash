@@ -23,6 +23,7 @@ wget https://raw.githubusercontent.com/rstober/dotfiles/main/clone-software-imag
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-gnome-desktop.yaml .
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-b4ds.yaml .
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/clone-and-update-category.yaml .
+wget https://raw.githubusercontent.com/rstober/dotfiles/main/assign-nodes-to-category.yaml .
 
 # download playbooks
 
@@ -42,14 +43,18 @@ cp ansible.cfg /root/.ansible.cfg
 # export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
 # ansible-playbook -ilocalhost, --flush-cache ${installdir}/run-yum-update.yaml
 
-# must use the Bright python package to intercat with cm-python3 intereter for the Bright collection
-# export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
+# must use the Bright python package to use the Bright collection
+export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
 # ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-software-image.yaml
 
 # clone the default category -> cloned category
 # update cloned category to use cloned-image software image
 ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-and-update-category.yaml
 
+# assign cnode001..cnode004 to cloned category
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/assign-nodes-to-category.yaml
+
+# need to use the system python for dnf operations
 export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
 
 # install B4DS into cloned software image
