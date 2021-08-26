@@ -3,21 +3,21 @@
   gather_facts: false
   tasks:
   - name: set cnode001 category -> cloned 
-    brightcomputing.bcm.physical_node:
+    brightcomputing.bcm.cloud_node:
       hostname: cnode001
       category: cloned
       
   - name: set cnode002 category -> cloned 
-    brightcomputing.bcm.physical_node:
+    brightcomputing.bcm.cloud_node:
       hostname: cnode002
       category: cloned
       
   - name: set cnode003 category -> cloned 
-    brightcomputing.bcm.physical_node:
+    brightcomputing.bcm.cloud_node:
       hostname: cnode003
       category: cloned
       
   - name: set cnode004 category -> cloned 
-    brightcomputing.bcm.physical_node:
+    brightcomputing.bcm.cloud_node:
       hostname: cnode004
       category: cloned
