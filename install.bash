@@ -22,6 +22,7 @@ wget https://raw.githubusercontent.com/rstober/dotfiles/main/run-yum-update.yaml
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/clone-software-image.yaml .
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-gnome-desktop.yaml .
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-b4ds.yaml .
+wget https://raw.githubusercontent.com/rstober/dotfiles/main/clone-and-update-category.yaml .
 
 # download playbooks
 
@@ -42,8 +43,12 @@ cp ansible.cfg /root/.ansible.cfg
 # ansible-playbook -ilocalhost, --flush-cache ${installdir}/run-yum-update.yaml
 
 # must use the Bright python package to intercat with cm-python3 intereter for the Bright collection
-export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
-ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-software-image.yaml
+# export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
+# ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-software-image.yaml
+
+# clone the default category -> cloned category
+# update cloned category to use cloned-image software image
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-and-update-category.yaml
 
 export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
 

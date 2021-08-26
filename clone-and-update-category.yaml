@@ -1,0 +1,13 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: clone default category -> cloned category
+      brightcomputing.bcm.category:
+        name: cloned
+        cloneFrom: default
+        
+    - name: set cloned category software image: cloned-image
+      brightcomputing.bcm.category:
+        softwareImageProxy: 
+          parentSoftwareImage: cloned-image

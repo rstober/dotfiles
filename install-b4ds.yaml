@@ -3,8 +3,15 @@
   gather_facts: false
 
   tasks:
-    - name: Install B4DS packages
+    - name: Install Tensorflow2 and OpenMPI
       dnf:
         name: ['cm-tensorflow2-py37-cuda10.2-gcc', 'cm-openmpi-geib-cuda10.2-gcc8']
-        state: present
+        state: latest
         update_cache: yes
+    
+    - name: Install cuda-driver and cuda-dcgm into cloned-image
+      dnf:
+        name: ['cuda-driver', 'cuda-dcgm']
+        state: latest
+        update_cache: yes
+        installroot: "/cm/images/cloned-image"
