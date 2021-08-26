@@ -3,14 +3,14 @@
   gather_facts: false
 
   tasks:
-    - name: Update all packages
-      yum:
+    - name: Update head node
+      dnf:
         name: "*"
         state: latest
         update_cache: yes
         
-    - name: Update default software image
-      yum:
+    - name: Update default-image
+      dnf:
         name: "*"
         installroot: "/cm/images/default-image"
         state: latest

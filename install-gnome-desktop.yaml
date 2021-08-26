@@ -3,8 +3,8 @@
   gather_facts: false
 
   tasks:
-    - name: Install gnome desktop
-      yum:
+    - name: Install gnome desktop into cloned-image
+      dnf:
         name: '@workstation'
         state: present
         update_cache: yes
