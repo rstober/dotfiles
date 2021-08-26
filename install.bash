@@ -49,7 +49,7 @@ export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
 
 # clone the default category -> cloned category
 # update cloned category to use cloned-image software image
-ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-and-update-category.yaml
+#ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-and-update-category.yaml
 
 # assign cnode001..cnode004 to cloned category
 ansible-playbook -ilocalhost, --flush-cache ${installdir}/assign-nodes-to-category.yaml
@@ -58,10 +58,10 @@ ansible-playbook -ilocalhost, --flush-cache ${installdir}/assign-nodes-to-catego
 export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
 
 # install B4DS into cloned software image
-ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-b4ds.yaml
+# ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-b4ds.yaml
 
 # install gnome desktop in cloned software image
-ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-gnome-desktop.yaml
+# ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-gnome-desktop.yaml
 
 # create a set of users
 # for user in robert david alice bob charlie edgar frank
