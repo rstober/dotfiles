@@ -8,13 +8,6 @@
         name: ['cm-tensorflow2-py37-cuda10.2-gcc', 'cm-openmpi-geib-cuda10.2-gcc8']
         state: latest
         update_cache: yes
-        
-    - name: Remove cuda-driver and cuda-dcgm from head node
-      dnf:
-        name: ['cuda-driver', 'cuda-dcgm']
-        state: absent
-        autoremove: no
-        update_cache: yes
     
     - name: Install cuda-driver and cuda-dcgm into cloned-image
       dnf:
