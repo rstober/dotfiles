@@ -1,0 +1,28 @@
+---
+- hosts: all
+  gather_facts: false
+  collections:
+    - brightcomputing.bcm
+
+  tasks:     
+    - name: configure slurm-client overlay and slurmclient role
+      configuration_overlay:
+        name: slurm-client
+        categories: [ 'cloned' ]
+        roles_SlurmClientRole:
+          - name: slurmclient
+            boards: 1
+            sockets: 1
+            coresPerSocket: 2
+            threadsPerCore: 2
+            slots: 4
+            realMemory: 15535
+            genericResources:
+              - name: "gpu"
+                alias: "gpu0"
+                file: "/dev/nvidia0"
+                type: "t4"
+                count: "1"  # must be a string
+                consumable: true
+                addToGresConfig: true
+          

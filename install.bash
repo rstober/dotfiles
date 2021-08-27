@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -xv
+#set -xv
 
 installdir=/root/.road-runner
 
@@ -24,6 +24,8 @@ wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-gnome-deskt
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-b4ds.yaml .
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/clone-and-update-category.yaml .
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/assign-nodes-to-category.yaml .
+wget https://raw.githubusercontent.com/rstober/dotfiles/main/configure-slurm.yaml .
+wget https://raw.githubusercontent.com/rstober/dotfiles/main/configure-usemarketplaceamis.yaml .
 
 # download playbooks
 
@@ -47,12 +49,17 @@ cp ansible.cfg /root/.ansible.cfg
 export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
 # ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-software-image.yaml
 
-# clone the default category -> cloned category
-# update cloned category to use cloned-image software image
+# clone the default category -> cloned set to use cloned-image
 #ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-and-update-category.yaml
 
 # assign cnode001..cnode004 to cloned category
 ansible-playbook -ilocalhost, --flush-cache ${installdir}/assign-nodes-to-category.yaml
+
+# configure slurm-client overlay and slurm-client role
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-slurm.yaml
+
+# allow use of marketplace amis
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-usemarketplaceamis.yaml
 
 # need to use the system python for dnf operations
 export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python

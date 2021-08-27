@@ -1,0 +1,8 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: allow use of marketplace AMIs
+      brightcomputing.bcm.ec2_provider:
+        name: "amazon"
+        useMarketplaceAMIs: "AS_NEEDED"
