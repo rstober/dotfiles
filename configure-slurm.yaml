@@ -3,7 +3,7 @@
   gather_facts: false
 
   tasks:  
-     - name configure slurm cluster -> constrain devices
+    - name: configure slurm cluster -> constrain devices
       brightcomputing.bcm.slurm_wlm_cluster:
         name: "slurm"
         cgroups:
