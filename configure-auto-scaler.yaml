@@ -1,0 +1,34 @@
+---
+- hosts: all
+  gather_facts: false
+  collections:
+    - brightcomputing.bcm
+
+  tasks:     
+    - name: configure auto-scaler
+      brightcomputing.bcm.configuration_overlay:
+        name: "auto-scaler"
+        categories: [ 'cloned' ]
+        roles_ScaleServerRole:
+          - name: "scaleserver"
+            runInterval: 120
+            debug: true
+            resourceProviders_ScaleDynamicNodesProvider:
+              - name: "aws"
+                templateNode: "cnode001"
+                nodeRange: "cnode002..cnode006"
+                networkInterface: "eth0"
+                allocationProlog: "/cm/shared/jobs/prologs/prolog"
+                allocationEpilog: "/cm/shared/jobs/epilogs/epilog"
+                defaultResources: ['cpus=4','mem_free:slurm=16GB','gpus=1']
+            engines_ScaleHpcEngine:
+              - name: "slurm"
+                workloadsPerNode: 4
+                wlmCluster: "slurm"
+                trackers_ScaleHpcQueueTracker:
+                  - name: "gpu"
+                    queue: "gpu"
+                    primaryOverlays: ['slurm-client']
+                    allowedResourceProviders: ['aws']
+                    workloadsPerNode: 4
+                    

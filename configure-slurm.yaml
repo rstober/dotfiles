@@ -1,16 +1,31 @@
 ---
 - hosts: all
   gather_facts: false
-  collections:
-    - brightcomputing.bcm
 
-  tasks:     
+  tasks:  
+     - name configure slurm cluster -> constrain devices
+      brightcomputing.bcm.slurm_wlm_cluster:
+        name: "slurm"
+        cgroups:
+          constrainDevices: true
+    
+    - name: clone defq -> gpu
+      brightcomputing.bcm.slurm_job_queue:
+        name: "gpu"
+        cloneFrom: "defq"
+        defaultQueue: false
+        overSubscribe: "yes:4"
+        wlmCluster: "slurm"
+        
     - name: configure slurm-client overlay and slurmclient role
-      configuration_overlay:
+      brightcomputing.bcm.configuration_overlay:
         name: slurm-client
+        categories: []
         categories: [ 'cloned' ]
         roles_SlurmClientRole:
           - name: slurmclient
+            wlmCluster: "slurm"
+            queues: ['gpu']
             boards: 1
             sockets: 1
             coresPerSocket: 2
