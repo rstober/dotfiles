@@ -31,4 +31,5 @@
                     primaryOverlays: ['slurm-client']
                     allowedResourceProviders: ['aws']
                     workloadsPerNode: 4
+                    assignCategory: "cloned"
                     
