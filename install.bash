@@ -63,7 +63,7 @@ export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
 #ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-and-update-category.yaml
 
 # assign cnode001..cnode004 to cloned category
-#ansible-playbook -ilocalhost, --flush-cache ${installdir}/assign-nodes-to-category.yaml
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/assign-nodes-to-category.yaml
 
 # configure slurm-client overlay and slurm-client role
 ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-slurm.yaml
