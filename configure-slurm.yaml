@@ -26,8 +26,7 @@
           - name: slurmclient
             wlmCluster: "slurm"
             queues: ['gpu']
-            boards: 1
-            sockets: 1
+            socketsPerBoard: 1
             coresPerSocket: 2
             threadsPerCore: 2
             slots: 4
