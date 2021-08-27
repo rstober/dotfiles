@@ -8,7 +8,7 @@
     - name: configure auto-scaler
       brightcomputing.bcm.configuration_overlay:
         name: "auto-scaler"
-        categories: [ 'cloned' ]
+        allHeadNodes: true
         roles_ScaleServerRole:
           - name: "scaleserver"
             runInterval: 60
