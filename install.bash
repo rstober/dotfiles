@@ -41,7 +41,7 @@ wget https://raw.githubusercontent.com/rstober/dotfiles/main/cm-jupyter-setup.co
 cp cm-jupyter-setup.conf /root/cm-jupyter-setup.conf
 
 # # install the brightcomputing.bcm collection
-# module load python3
+module load python3
 # pip install ansible-base
 # ansible-galaxy collection install brightcomputing.bcm
 
