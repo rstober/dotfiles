@@ -1,0 +1,9 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+
+    - name: Install Jupyter using the bash shell
+      ansible.builtin.shell: cm-jupyter-setup -c /root/cm-jupyter-setup.conf
+      args:
+      executable: /bin/bash
