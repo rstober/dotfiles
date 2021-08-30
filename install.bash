@@ -29,6 +29,7 @@ wget https://raw.githubusercontent.com/rstober/dotfiles/main/configure-auto-scal
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/configure-usemarketplaceamis.yaml
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-jupyter.yaml
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/cm-jupyter-setup.conf
+wget https://raw.githubusercontent.com/rstober/dotfiles/main/install.bash
 
 # download playbooks
 
