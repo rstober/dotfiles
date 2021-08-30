@@ -39,4 +39,9 @@
                 count: "1"  # must be a string
                 consumable: true
                 addToGresConfig: true
-          
+    
+    - name: configure slurm-submit overlay and slurmsubmit role
+      brightcomputing.bcm.configuration_overlay:
+        name: slurm-submit
+        categories: []
+        categories: [ 'cloned' ]
