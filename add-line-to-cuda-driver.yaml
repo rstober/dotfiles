@@ -4,6 +4,6 @@
   tasks:
   - name: add a line to the cuda-driver service file
     lineinfile:
-      path: /cm/images/cloned-image/usr/libexec/cm/cuda-testfile
+      path: /cm/images/cloned-image/usr/libexec/cm/cuda-driver
       insertafter: '^LOG_FILE='
       line: export IGNORE_CC_MISMATCH=1
