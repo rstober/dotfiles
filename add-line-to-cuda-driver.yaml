@@ -2,7 +2,8 @@
 - hosts: all
   gather_facts: false
   tasks:
-  - lineinfile:
-    name: /cm/images/cloned-image/usr/libexec/cm/cuda-testfile
-    regexp: '^LOG_FILE='
-    line: export IGNORE_CC_MISMATCH=1
+  - name: add a line to the cuda-driver service file
+    lineinfile:
+      name: /cm/images/cloned-image/usr/libexec/cm/cuda-testfile
+      regexp: '^LOG_FILE='
+      line: export IGNORE_CC_MISMATCH=1
