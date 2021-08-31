@@ -15,6 +15,7 @@ rm *
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/cmshrc
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/bookmarks-cmsh
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/du.cmsh
+wget https://raw.githubusercontent.com/rstober/dotfiles/main/dp.cmsh
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/si.cmsh
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/ansible.cfg
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/add-user.yaml
@@ -28,17 +29,19 @@ wget https://raw.githubusercontent.com/rstober/dotfiles/main/configure-slurm.yam
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/configure-auto-scaler.yaml
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/configure-usemarketplaceamis.yaml
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-jupyter.yaml
+wget https://raw.githubusercontent.com/rstober/dotfiles/main/add-line-to-cuda-driver.yaml
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/cm-jupyter-setup.conf
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/install.bash
 
 # download playbooks
 
 # # install
-# cp cmshrc /root/.cmshrc
-# cp bookmarks-cmsh /root/.bookmarks-cmsh
-# cp du.cmsh /root/.cm/cmsh/du.cmsh
-# cp si.cmsh /root/.cm/cmsh/si.cmsh
-# cp ansible.cfg /root/.ansible.cfg
+cp cmshrc /root/.cmshrc
+cp bookmarks-cmsh /root/.bookmarks-cmsh
+cp du.cmsh /root/.cm/cmsh/du.cmsh
+cp si.cmsh /root/.cm/cmsh/si.cmsh
+cp dp.cmsh /root/.cm/cmsh/dp.cmsh
+cp ansible.cfg /root/.ansible.cfg
 cp cm-jupyter-setup.conf /root/cm-jupyter-setup.conf
 
 # # install the brightcomputing.bcm collection
@@ -54,9 +57,13 @@ module load python3
 # export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
 # ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-software-image.yaml
 
-# # install B4DS into cloned software image
-# export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
+# install B4DS into cloned software image
+export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
 # ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-b4ds.yaml
+
+# also need to set export IGNORE_CC_MISMATCH=1 in /cm/images/cloned-image/usr/libexec/cm/cuda-driver
+# doint this manually for now
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/add-line-to-cuda-driver.yaml
 
 # # install gnome desktop in cloned software image
 # ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-gnome-desktop.yaml
@@ -78,8 +85,8 @@ module load python3
 # # allow use of marketplace amis
 # ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-usemarketplaceamis.yaml
 
-# install Jupyter
-ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-jupyter.yaml
+# # install Jupyter
+# ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-jupyter.yaml
 
 # # create a set of users
 # for user in robert david alice bob charlie edgar frank
