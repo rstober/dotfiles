@@ -15,8 +15,8 @@
         state: latest
         update_cache: yes
         installroot: "/cm/images/cloned-image"
-    
-    - name: add a line to the cuda-driver service file
+        
+    - name: add IGNORE_CC_MISMATCH to cuda-driver service file
       lineinfile:
         path: /cm/images/cloned-image/usr/libexec/cm/cuda-driver
         insertafter: '^LOG_FILE='
