@@ -1,4 +1,4 @@
 -=home;device;use "master";
 dt=home;device;
 ms=home;device;use "master";services;
-ss=home;device;use "master";roles;use scaleserver;
+ss=home;configurationoverlay;use "auto-scaler";roles;use scaleserver;
