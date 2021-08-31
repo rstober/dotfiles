@@ -1,0 +1,8 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+  - lineinfile:
+    path: /cm/images/cloned-image/usr/libexec/cm/cuda-testfile
+    regexp: '^LOG_FILE='
+    line: export IGNORE_CC_MISMATCH=1
