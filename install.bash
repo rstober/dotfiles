@@ -29,7 +29,6 @@ wget https://raw.githubusercontent.com/rstober/dotfiles/main/configure-slurm.yam
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/configure-auto-scaler.yaml
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/configure-usemarketplaceamis.yaml
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-jupyter.yaml
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/add-line-to-cuda-driver.yaml
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/cm-jupyter-setup.conf
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/install.bash
 
@@ -44,52 +43,48 @@ cp dp.cmsh /root/.cm/cmsh/dp.cmsh
 cp ansible.cfg /root/.ansible.cfg
 cp cm-jupyter-setup.conf /root/cm-jupyter-setup.conf
 
-# # install the brightcomputing.bcm collection
+# install the brightcomputing.bcm collection
 module load python3
-# pip install ansible-base
-# ansible-galaxy collection install brightcomputing.bcm
+pip install ansible-base
+ansible-galaxy collection install brightcomputing.bcm
 
-# # must use the system python to use Ansible's built-in yum/dnf
-# export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
-# ansible-playbook -ilocalhost, --flush-cache ${installdir}/run-yum-update.yaml
+# must use the system python to use Ansible's built-in yum/dnf
+export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/run-yum-update.yaml
 
-# # must use the Bright python package to use the Bright collection
-# export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
-# ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-software-image.yaml
+# must use the Bright python package to use the Bright collection
+export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-software-image.yaml
 
 # install B4DS into cloned software image
 export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
-# ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-b4ds.yaml
-
-# also need to set export IGNORE_CC_MISMATCH=1 in /cm/images/cloned-image/usr/libexec/cm/cuda-driver
-# doint this manually for now
-ansible-playbook -ilocalhost, --flush-cache ${installdir}/add-line-to-cuda-driver.yaml
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-b4ds.yaml
 
 # # install gnome desktop in cloned software image
-# ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-gnome-desktop.yaml
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-gnome-desktop.yaml
 
-# export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
+export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
 
-# # clone the default category -> cloned set to use cloned-image
-# ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-and-update-category.yaml
+# clone the default category -> cloned set to use cloned-image
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-and-update-category.yaml
 
-# # assign cnode001..cnode004 to cloned category
-# ansible-playbook -ilocalhost, --flush-cache ${installdir}/assign-nodes-to-category.yaml
+# assign cnode001..cnode004 to cloned category
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/assign-nodes-to-category.yaml
 
-# # configure slurm-client overlay and slurm-client role
-# ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-slurm.yaml
+# configure slurm-client overlay and slurm-client role
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-slurm.yaml
 
-# # configure auto scaler
-# ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-auto-scaler.yaml
+# configure auto scaler
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-auto-scaler.yaml
 
-# # allow use of marketplace amis
-# ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-usemarketplaceamis.yaml
+# allow use of marketplace amis
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-usemarketplaceamis.yaml
 
-# # install Jupyter
-# ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-jupyter.yaml
+# install Jupyter
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-jupyter.yaml
 
-# # create a set of users
-# for user in robert david alice bob charlie edgar frank
-# do
-    # ansible-playbook -ilocalhost, --flush-cache --extra-vars "username=$user pass=6b3rl1n5 prof=cloudjob" ${installdir}/add-user.yaml
-# done
+# create a set of users
+for user in robert david alice bob charlie edgar frank
+do
+    ansible-playbook -ilocalhost, --flush-cache --extra-vars "username=$user pass=6b3rl1n5 prof=cloudjob" ${installdir}/add-user.yaml
+done
