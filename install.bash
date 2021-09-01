@@ -32,6 +32,8 @@ wget https://raw.githubusercontent.com/rstober/dotfiles/main/cm-jupyter-setup.co
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/install.bash
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 
+exit
+
 # download playbooks
 
 # # install
