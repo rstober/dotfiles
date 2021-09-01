@@ -32,6 +32,7 @@ wget https://raw.githubusercontent.com/rstober/dotfiles/main/configure-usemarket
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-jupyter.yaml
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/cm-jupyter-setup.conf
 wget https://raw.githubusercontent.com/rstober/dotfiles/main/install.bash
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 
 # download playbooks
 
@@ -44,14 +45,16 @@ cp dp.cmsh /root/.cm/cmsh/dp.cmsh
 cp ansible.cfg /root/.ansible.cfg
 cp cm-jupyter-setup.conf /root/cm-jupyter-setup.conf
 
-module load python3
-pip install ansible-base
+#module load python3
+#pip install ansible-base
 
 # install the brightcomputing.bcm collection
-ansible-galaxy collection install brightcomputing.bcm
+#ansible-galaxy collection install brightcomputing.bcm
 
-# install the amazon.aws collection
-ansible-galaxy collection install amazon.aws
+# install the AWS CLI
+
+unzip awscliv2.zip
+./aws/install
 
 # # must use the system python to use Ansible's built-in yum/dnf
 # export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
