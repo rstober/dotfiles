@@ -2,7 +2,7 @@
 - hosts: all
   gather_facts: false
   tasks:
-    - name: clone default-image -> cloned-image
+    - name: Clone default-image -> cloned-image
       brightcomputing.bcm.software_image:
         name: cloned-image
         cloneFrom: default-image
