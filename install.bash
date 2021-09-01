@@ -7,7 +7,7 @@ installdir=/root/.road-runner
 if [ ! -d $installdir ]; then
     mkdir -p $installdir
 else
-    rm *
+    rm -rf *
 fi
 
 cd $installdir
