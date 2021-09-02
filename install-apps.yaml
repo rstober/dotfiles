@@ -4,5 +4,5 @@
   tasks:
     - name: Install user applications
       ansible.builtin.unarchive:
-        src: /root/.road-runner/jobs.tar.gz
+        src: "{{ installdir }}/jobs.tar.gz"
         dest: /cm/shared
