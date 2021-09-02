@@ -20,7 +20,6 @@
     - name: configure slurm-client overlay and slurmclient role
       brightcomputing.bcm.configuration_overlay:
         name: slurm-client
-        categories: []
         categories: [ 'cloned' ]
         roles_SlurmClientRole:
           - name: slurmclient
@@ -43,5 +42,4 @@
     - name: configure slurm-submit overlay and slurmsubmit role
       brightcomputing.bcm.configuration_overlay:
         name: slurm-submit
-        categories: []
         categories: [ 'cloned' ]
