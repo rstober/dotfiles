@@ -1,7 +1,16 @@
-alias ll list
+# these aliases reduce the typing effort required
+# additional aliases will be created by cmsh once it processes scriptlets
+
+# aliases
+alias cl configurationoverlay list
 alias dl device list
+alias ll list
 alias bm bookmark
+
+# navigational aliases
 alias ss goto ss
 alias dt goto dt
 alias ms goto ms
+
+# read in saved bookmarks
 bookmark -x /root/.bookmarks-cmsh
