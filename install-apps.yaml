@@ -1,0 +1,8 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Install user applications
+      ansible.builtin.unarchive:
+        src: {{ installdir }}/jobs.tar.gz
+        dest: /cm/shared/jobs
