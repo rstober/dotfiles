@@ -45,52 +45,52 @@ cp dp.cmsh /root/.cm/cmsh/dp.cmsh
 cp ansible.cfg /root/.ansible.cfg
 
 module load python3
-# pip install ansible-base
+pip install ansible-base
 
-# # install the brightcomputing.bcm collection
-# ansible-galaxy collection install brightcomputing.bcm
+# install the brightcomputing.bcm collection
+ansible-galaxy collection install brightcomputing.bcm
 
-# # install the AWS CLI
-# unzip awscliv2.zip
-# ./aws/install
+# install the AWS CLI
+unzip awscliv2.zip
+./aws/install
 
-# # must use the system python to use Ansible's built-in yum/dnf
-# export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
-# ansible-playbook -ilocalhost, --flush-cache ${installdir}/run-yum-update.yaml
-
-# # must use the Bright python package to use the Bright collection
-# export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
-# ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-software-image.yaml
-
-# # install B4DS into cloned software image
+# must use the system python to use Ansible's built-in yum/dnf
 export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
-# ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-b4ds.yaml
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/run-yum-update.yaml
 
-# # # install gnome desktop in cloned software image
-# ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-gnome-desktop.yaml
+# must use the Bright python package to use the Bright collection
+export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-software-image.yaml
 
-# export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
+# install B4DS into cloned software image
+export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-b4ds.yaml
 
-# # clone the default category -> cloned set to use cloned-image
-# ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-and-update-category.yaml
+# # install gnome desktop in cloned software image
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-gnome-desktop.yaml
 
-# # assign cnode001..cnode004 to cloned category
-# ansible-playbook -ilocalhost, --flush-cache ${installdir}/assign-nodes-to-category.yaml
+export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
 
-# # configure slurm-client overlay and slurm-client role
-# ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-slurm.yaml
+# clone the default category -> cloned set to use cloned-image
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-and-update-category.yaml
 
-# # configure auto scaler
-# ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-auto-scaler.yaml
+# assign cnode001..cnode004 to cloned category
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/assign-nodes-to-category.yaml
 
-# # allow use of marketplace amis
-# ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-usemarketplaceamis.yaml
+# configure slurm-client overlay and slurm-client role
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-slurm.yaml
+
+# configure auto scaler
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-auto-scaler.yaml
+
+# allow use of marketplace amis
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-usemarketplaceamis.yaml
 
 # install Jupyter
-ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-jupyter.yaml
+#ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-jupyter.yaml
 
-# # create a set of users
-# for user in robert david alice bob charlie edgar frank
-# do
-    # ansible-playbook -ilocalhost, --flush-cache --extra-vars "username=$user pass=6b3rl1n5 prof=cloudjob" ${installdir}/add-user.yaml
-# done
+# create a set of users
+for user in robert david alice bob charlie edgar frank
+do
+    ansible-playbook -ilocalhost, --flush-cache --extra-vars "username=$user pass=6b3rl1n5 prof=cloudjob" ${installdir}/add-user.yaml
+done
