@@ -35,7 +35,7 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 
 # download playbooks
 
-# # install
+# install
 cp cmshrc /root/.cmshrc
 cp bookmarks-cmsh /root/.bookmarks-cmsh
 cp du.cmsh /root/.cm/cmsh/du.cmsh
@@ -43,9 +43,8 @@ cp cu.cmsh /root/.cm/cmsh/cu.cmsh
 cp si.cmsh /root/.cm/cmsh/si.cmsh
 cp dp.cmsh /root/.cm/cmsh/dp.cmsh
 cp ansible.cfg /root/.ansible.cfg
-#cp cm-jupyter-setup.conf /root/cm-jupyter-setup.conf
 
-#module load python3
+module load python3
 pip install ansible-base
 
 # install the brightcomputing.bcm collection
