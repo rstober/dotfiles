@@ -44,7 +44,7 @@ cp si.cmsh /root/.cm/cmsh/si.cmsh
 cp dp.cmsh /root/.cm/cmsh/dp.cmsh
 cp ansible.cfg /root/.ansible.cfg
 
-# module load python3
+module load python3
 # pip install ansible-base
 
 # # install the brightcomputing.bcm collection
