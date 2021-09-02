@@ -1,9 +1,53 @@
 ---
 - hosts: all
-  gather_facts: false
+  
   tasks:
 
+    - name: Get security group from CMSH
+      ansible.builtin.shell: 'cmsh -c "cloud; vpcs; use vpc-0; get SecGroupD"'
+      args:
+        executable: /bin/bash
+      register: aws_sec_group
+      ignore_errors: true
+      
+    - name: Get AWS access key from CMSH
+      ansible.builtin.shell: 'cmsh -c "cloud; get accesskeyid"'
+      args:
+        executable: /bin/bash
+      register: aws_access_key
+      ignore_errors: true
+      
+    - name: Get AWS secret key from CMSH
+      ansible.builtin.shell: 'cmsh -c "cloud; get secretaccesskey"'
+      args:
+        executable: /bin/bash
+      register: aws_secret_key
+      ignore_errors: true
+    
+    - name: Get default region from CMSH
+      ansible.builtin.shell: 'cmsh -c "cloud; get defaultregion"'
+      args:
+        executable: /bin/bash
+      register: aws_region
+      ignore_errors: true
+      
+    - name: Create cm-jupyter-setup configuration file
+      template:
+        src: cm-jupyter-setup.conf.template
+        dest: /root/cm-jupyter-setup.conf
+        mode: 0644
+      
     - name: Install Jupyter using the bash shell
       ansible.builtin.shell: cm-jupyter-setup -c /root/cm-jupyter-setup.conf
       args:
         executable: /bin/bash
+     
+    - name: Open port 8000 on the (cloud) head node
+      ansible.builtin.shell: aws ec2 authorize-security-group-ingress --group-id {{ aws_sec_group.stdout }} --protocol tcp --port 8000 --cidr 0.0.0.0/0
+      args:
+        executable: /bin/bash
+      environment:
+        AWS_ACCESS_KEY_ID: "{{ aws_access_key.stdout }}"
+        AWS_SECRET_ACCESS_KEY: "{{ aws_secret_key.stdout }}"
+        AWS_DEFAULT_REGION: "{{ aws_region.stdout }}"
+    
