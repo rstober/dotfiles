@@ -16,7 +16,7 @@
             resourceProviders_ScaleDynamicNodesProvider:
               - name: "aws"
                 templateNode: "cnode001"
-                nodeRange: "cnode002..cnode006"
+                nodeRange: "cnode002..cnode004"
                 networkInterface: "eth0"
                 defaultResources: ['cpus=4','mem_free:slurm=16GB','gpu_free:t4:slurm=1']
             engines_ScaleHpcEngine:
