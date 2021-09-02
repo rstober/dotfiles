@@ -5,7 +5,7 @@
   tasks:
     - name: Install Tensorflow2 and OpenMPI
       dnf:
-        name: ['cm-tensorflow2-py37-cuda10.2-gcc', 'cm-openmpi-geib-cuda10.2-gcc8']
+        name: ['cm-tensorflow2-py37-cuda10.2-gcc8', 'cm-tensorflow2-extra-py37-cuda10.2-gcc8', 'cm-openmpi4-cuda10.2-ofed50-gcc8']
         state: present
         update_cache: yes
     
