@@ -14,6 +14,8 @@ yum install -y git
 
 git clone https://github.com/rstober/dotfiles.git $installdir
 
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
 module load python3
 pip install ansible-base
 
