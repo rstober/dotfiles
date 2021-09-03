@@ -10,7 +10,7 @@ fi
 
 cd $installdir && rm -rf $installdir/*
 
-git clone --bare https://github.com/rstober/dotfiles.git
+git clone https://github.com/rstober/dotfiles.git master $installdir
 
 #installdir=/root/.road-runner/dotfiles
 exit
