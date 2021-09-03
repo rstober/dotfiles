@@ -31,11 +31,13 @@ cp ansible.cfg /root/.ansible.cfg
 unzip awscliv2.zip
 ./aws/install
 
+# must use the system python to use Ansible's built-in yum/dnf
+export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
+
 # install the jobs the users will run-yum-update
 ansible-playbook -ilocalhost, --flush-cache --extra-vars "installdir=$installdir"  ${installdir}/install-apps.yaml
 
-# must use the system python to use Ansible's built-in yum/dnf
-export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
+# dnf update the head node and the default software image
 ansible-playbook -ilocalhost, --flush-cache ${installdir}/run-yum-update.yaml
 
 # must use the Bright python package to use the Bright collection
