@@ -38,8 +38,20 @@
                 count: "1"  # must be a string
                 consumable: true
                 addToGresConfig: true
-    
+                
+    # should replace default but instead it appends
     - name: configure slurm-submit overlay and slurmsubmit role
       brightcomputing.bcm.configuration_overlay:
         name: slurm-submit
         categories: [ 'cloned' ]
+    
+    # work-around to remove default category from slurm-client and slurm-submit   
+    - name: Remove default category from slurm-submit configuration overlay
+      ansible.builtin.shell: 'cmsh -c "configurationoverlay; removefrom slurm-submit categories default; commit"'
+      args:
+        executable: /bin/bash
+    
+    - name: Remove default category from slurm-client configuration overlay
+      ansible.builtin.shell: 'cmsh -c "configurationoverlay; removefrom slurm-client categories default; commit"'
+      args:
+        executable: /bin/bash
