@@ -12,36 +12,6 @@ cd $installdir && rm -rf $installdir/*
 
 git clone https://github.com/rstober/dotfiles.git $installdir
 
-#installdir=/root/.road-runner/dotfiles
-exit
-
-# download dot files
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/cmshrc
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/bookmarks-cmsh
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/du.cmsh
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/cu.cmsh
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/dp.cmsh
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/si.cmsh
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/ansible.cfg
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/add-user.yaml
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/run-yum-update.yaml
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/clone-software-image.yaml
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-gnome-desktop.yaml
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-b4ds.yaml
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/clone-and-update-category.yaml
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/assign-nodes-to-category.yaml
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/configure-slurm.yaml
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/configure-auto-scaler.yaml
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/configure-usemarketplaceamis.yaml
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-jupyter.yaml
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/cm-jupyter-setup.conf.template
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-apps.yaml
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/jobs.tar.gz
-# wget https://raw.githubusercontent.com/rstober/dotfiles/main/install.bash
-# curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-
-# download playbooks
-
 module load python3
 pip install ansible-base
 
