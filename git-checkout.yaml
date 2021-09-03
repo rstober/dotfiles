@@ -1,0 +1,10 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Git checkout
+      ansible.builtin.git:
+        repo: 'https://github.com/rstober/dotfiles.git'
+        dest: {{ installdir }}
+        single_branch: yes
+        version: master

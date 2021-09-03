@@ -10,30 +10,41 @@ fi
 
 cd $installdir && rm -rf $installdir/*
 
+module load python3
+#pip install ansible-base
+
+# install the brightcomputing.bcm collection
+#ansible-galaxy collection install brightcomputing.bcm
+
+export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
+ansible-playbook -ilocalhost, --flush-cache --extra-vars "installdir=$installdir"  ${installdir}/git-checkout.yaml
+
+exit
+
 # download dot files
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/cmshrc
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/bookmarks-cmsh
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/du.cmsh
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/cu.cmsh
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/dp.cmsh
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/si.cmsh
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/ansible.cfg
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/add-user.yaml
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/run-yum-update.yaml
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/clone-software-image.yaml
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-gnome-desktop.yaml
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-b4ds.yaml
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/clone-and-update-category.yaml
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/assign-nodes-to-category.yaml
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/configure-slurm.yaml
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/configure-auto-scaler.yaml
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/configure-usemarketplaceamis.yaml
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-jupyter.yaml
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/cm-jupyter-setup.conf.template
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-apps.yaml
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/jobs.tar.gz
-wget https://raw.githubusercontent.com/rstober/dotfiles/main/install.bash
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/cmshrc
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/bookmarks-cmsh
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/du.cmsh
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/cu.cmsh
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/dp.cmsh
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/si.cmsh
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/ansible.cfg
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/add-user.yaml
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/run-yum-update.yaml
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/clone-software-image.yaml
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-gnome-desktop.yaml
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-b4ds.yaml
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/clone-and-update-category.yaml
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/assign-nodes-to-category.yaml
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/configure-slurm.yaml
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/configure-auto-scaler.yaml
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/configure-usemarketplaceamis.yaml
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-jupyter.yaml
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/cm-jupyter-setup.conf.template
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/install-apps.yaml
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/jobs.tar.gz
+# wget https://raw.githubusercontent.com/rstober/dotfiles/main/install.bash
+# curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 
 # download playbooks
 
@@ -45,12 +56,6 @@ cp cu.cmsh /root/.cm/cmsh/cu.cmsh
 cp si.cmsh /root/.cm/cmsh/si.cmsh
 cp dp.cmsh /root/.cm/cmsh/dp.cmsh
 cp ansible.cfg /root/.ansible.cfg
-
-module load python3
-pip install ansible-base
-
-# install the brightcomputing.bcm collection
-ansible-galaxy collection install brightcomputing.bcm
 
 # install the AWS CLI
 unzip awscliv2.zip
