@@ -10,14 +10,7 @@ fi
 
 cd $installdir && rm -rf $installdir/*
 
-module load python3
-#pip install ansible-base
-
-# install the brightcomputing.bcm collection
-#ansible-galaxy collection install brightcomputing.bcm
-
-export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
-ansible-playbook -ilocalhost, --flush-cache --extra-vars "installdir=$installdir"  ${installdir}/git-checkout.yaml
+git clone https://github.com/rstober/dotfiles.git
 
 exit
 
@@ -47,6 +40,12 @@ exit
 # curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 
 # download playbooks
+
+module load python3
+pip install ansible-base
+
+# install the brightcomputing.bcm collection
+ansible-galaxy collection install brightcomputing.bcm
 
 # install
 cp cmshrc /root/.cmshrc
