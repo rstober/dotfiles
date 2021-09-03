@@ -10,6 +10,8 @@ fi
 
 cd $installdir && rm -rf $installdir/*
 
+yun install -y git
+
 git clone https://github.com/rstober/dotfiles.git $installdir
 
 module load python3
