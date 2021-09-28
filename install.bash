@@ -73,7 +73,7 @@ ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-auto-scaler.
 ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-usemarketplaceamis.yaml
 
 # install Jupyter
-#ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-jupyter.yaml
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-jupyter.yaml
 
 # create a set of users
 for user in robert david alice charlie edgar frank
