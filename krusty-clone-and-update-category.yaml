@@ -1,0 +1,25 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: clone default category -> cloned category
+      brightcomputing.bcm.category:
+        name: cloned
+        cloneFrom: default
+        
+    - name: clone default category -> gpu category
+      brightcomputing.bcm.category:
+        name: gpu
+        cloneFrom: default
+        
+    - name: set cloned category software image -> cloned-image
+      brightcomputing.bcm.category:
+        name: cloned
+        softwareImageProxy: 
+          parentSoftwareImage: cloned-image
+    
+    - name: set gpu category software image -> gpu-image
+      brightcomputing.bcm.category:
+        name: gpu
+        softwareImageProxy: 
+          parentSoftwareImage: gpu-image

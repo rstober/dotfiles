@@ -1,0 +1,57 @@
+---
+- hosts: all
+  gather_facts: false
+
+  tasks:  
+    - name: configure slurm cluster -> constrain devices
+      brightcomputing.bcm.slurm_wlm_cluster:
+        name: slurm
+        cgroups:
+          constrainDevices: true
+    
+    - name: clone defq -> gpu
+      brightcomputing.bcm.slurm_job_queue:
+        name: gpu
+        cloneFrom: defq
+        defaultQueue: false
+        overSubscribe: yes:2
+        wlmCluster: slurm
+        
+    - name: configure slurm-client overlay and slurmclient role
+      brightcomputing.bcm.configuration_overlay:
+        name: slurm-client
+        categories: [ 'gpu' ]
+        roles_SlurmClientRole:
+          - name: slurmclient
+            wlmCluster: "slurm"
+            queues: ['gpu']
+            socketsPerBoard: 1
+            coresPerSocket: 2
+            threadsPerCore: 1
+            slots: 2
+            realMemory: 8192
+            genericResources:
+              - name: gpu
+                alias: gpu0
+                file: /dev/nvidia0
+                type: v100
+                count: 1  # must be a string
+                consumable: true
+                addToGresConfig: true
+                
+    # should replace default but instead it appends
+    - name: configure slurm-submit overlay and slurmsubmit role
+      brightcomputing.bcm.configuration_overlay:
+        name: slurm-submit
+        categories: [ 'gpu' ]
+    
+    # work-around to remove default category from slurm-client and slurm-submit   
+    - name: Remove default category from slurm-submit configuration overlay
+      ansible.builtin.shell: 'cmsh -c "configurationoverlay; removefrom slurm-submit categories default; commit"'
+      args:
+        executable: /bin/bash
+    
+    - name: Remove default category from slurm-client configuration overlay
+      ansible.builtin.shell: 'cmsh -c "configurationoverlay; removefrom slurm-client categories default; commit"'
+      args:
+        executable: /bin/bash

@@ -1,0 +1,24 @@
+---
+- hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Install Tensorflow2 and OpenMPI
+      dnf:
+        name: ['cm-tensorflow2-py37-cuda10.2-gcc8', 'cm-tensorflow2-extra-py37-cuda10.2-gcc8', 'cm-openmpi4-cuda10.2-ofed50-gcc8']
+        state: present
+        update_cache: yes
+    
+    - name: Install cuda-driver and cuda-dcgm into cloned-image
+      dnf:
+        name: ['cuda-driver', 'cuda-dcgm']
+        state: present
+        update_cache: yes
+        installroot: "/cm/images/gpu-image"
+        
+    - name: add IGNORE_CC_MISMATCH to cuda-driver service file
+      lineinfile:
+        path: /cm/images/gpu-image/usr/libexec/cm/cuda-driver
+        insertafter: '^LOG_FILE='
+        line: export IGNORE_CC_MISMATCH=1
+        

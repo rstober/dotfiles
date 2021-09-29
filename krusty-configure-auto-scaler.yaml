@@ -1,0 +1,31 @@
+---
+- hosts: all
+  gather_facts: false
+  collections:
+    - brightcomputing.bcm
+
+  tasks:     
+    - name: configure auto-scaler
+      brightcomputing.bcm.configuration_overlay:
+        name: auto-scaler
+        allHeadNodes: true
+        roles_ScaleServerRole:
+          - name: scaleserver
+            runInterval: 60
+            debug: true
+            resourceProviders_ScaleDynamicNodesProvider:
+              - name: onprem
+                templateNode: node001
+                nodeRange: node002..node003
+                networkInterface: eth0
+                defaultResources: ['cpus=2','mem_free:slurm=4GB']
+            engines_ScaleHpcEngine:
+              - name: slurm
+                workloadsPerNode: 2
+                wlmCluster: slurm
+                trackers_ScaleHpcQueueTracker:
+                  - name: defq
+                    queue: defq
+                    primaryOverlays: ['slurm-client']
+                    allowedResourceProviders: ['aws']
+                    workloadsPerNode: 2
