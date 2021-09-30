@@ -7,18 +7,21 @@
       hostname: node001
       category: cloned
       powerControl: custom
+      customPowerScript: /cm/local/apps/cmd/scripts/powerscripts/os-power-control.py
       
   - name: set node002 category -> cloned 
     brightcomputing.bcm.physical_node:
       hostname: node002
       category: cloned
       powerControl: custom
+      customPowerScript: /cm/local/apps/cmd/scripts/powerscripts/os-power-control.py
       
   - name: set node003 category -> cloned 
     brightcomputing.bcm.physical_node:
       hostname: node003
       category: cloned
-      powerControl: "custom"
+      powerControl: custom
+      customPowerScript: /cm/local/apps/cmd/scripts/powerscripts/os-power-control.py
       
   - name: set node004 category -> gpu
     brightcomputing.bcm.physical_node:

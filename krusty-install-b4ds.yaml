@@ -14,7 +14,7 @@
         name: ['cuda-driver', 'cuda-dcgm']
         state: present
         update_cache: yes
-        installroot: "/cm/images/gpu-image"
+        installroot: /cm/images/gpu-image
         
     - name: add IGNORE_CC_MISMATCH to cuda-driver service file
       lineinfile:

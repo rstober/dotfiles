@@ -39,7 +39,7 @@ cp ansible.cfg /root/.ansible.cfg
 export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
 
 # dnf update the head node and the default software image
-ansible-playbook -ilocalhost, --flush-cache ${installdir}/run-yum-update.yaml
+#ansible-playbook -ilocalhost, --flush-cache ${installdir}/run-yum-update.yaml
 
 # must use the Bright python package to use the Bright collection
 export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
