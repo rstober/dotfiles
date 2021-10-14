@@ -76,7 +76,10 @@ ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-usemarketpla
 ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-jupyter.yaml
 
 # create a set of users
+pass=$(tr -cd '0-9a-zA-Z!@#$%^' < /dev/urandom | fold -w${1-32} | head -n1)
+echo $pass > /root/.userpassword
+chmod 400 /root/.userpassword
 for user in robert david alice charlie edgar frank
 do
-    ansible-playbook -ilocalhost, --flush-cache --extra-vars "username=$user pass=6b3rl1n5 prof=cloudjob" ${installdir}/add-user.yaml
+    ansible-playbook -ilocalhost, --flush-cache --extra-vars "username=$user pass=$(cat /root/.userpassword) ${installdir}/add-user.yaml
 done
