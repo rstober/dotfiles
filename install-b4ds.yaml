@@ -11,10 +11,10 @@
     
     - name: Install cuda-driver and cuda-dcgm into cloned-image
       dnf:
-        name: ['cuda-driver', 'cuda-dcgm']
+        name: ['cuda-driver', 'cuda-dcgm', 'cm-ml-distdeps-cuda10.2']
         state: present
         update_cache: yes
-        installroot: "/cm/images/cloned-image"
+        installroot: /cm/images/cloned-image
         
     - name: add IGNORE_CC_MISMATCH to cuda-driver service file
       lineinfile:
