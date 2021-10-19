@@ -5,6 +5,8 @@
   tasks:
     - name: create user
       brightcomputing.bcm.user:
-        name: "{{ username }}"
+        name: "{{ user }}"
         password: "{{ pass }}"
-        profile: "{{ prof }}"
+        
+ 
+

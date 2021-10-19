@@ -22,6 +22,9 @@ pip install ansible-base
 # install the brightcomputing.bcm collection
 ansible-galaxy collection install brightcomputing.bcm
 
+# install the Amazon collection
+ansible-galaxy collection install amazon.aws
+
 # install
 cp cmshrc /root/.cmshrc
 cp bookmarks-cmsh /root/.bookmarks-cmsh
@@ -32,8 +35,8 @@ cp dp.cmsh /root/.cm/cmsh/dp.cmsh
 cp ansible.cfg /root/.ansible.cfg
 
 # install the AWS CLI
-unzip awscliv2.zip
-./aws/install
+# unzip awscliv2.zip
+# ./aws/install
 
 # must use the system python to use Ansible's built-in yum/dnf
 export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
@@ -79,7 +82,8 @@ ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-jupyter.yaml
 pass=$(tr -cd '0-9a-zA-Z!@#$%^' < /dev/urandom | fold -w${1-32} | head -n1)
 echo $pass > /root/.userpassword
 chmod 400 /root/.userpassword
+
 for user in robert david alice charlie edgar frank
 do
-    ansible-playbook -ilocalhost, --flush-cache --extra-vars "username=$user pass=$(cat /root/.userpassword) ${installdir}/add-user.yaml
+    ansible-playbook -ilocalhost, --flush-cache --extra-vars "user=$user pass=$pass" ${installdir}/add-user.yaml
 done
