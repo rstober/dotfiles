@@ -23,7 +23,7 @@ pip install ansible-base
 ansible-galaxy collection install brightcomputing.bcm
 
 # install the Amazon collection
-ansible-galaxy collection install amazon.aws
+#ansible-galaxy collection install amazon.aws
 
 # install
 cp cmshrc /root/.cmshrc
@@ -34,9 +34,9 @@ cp si.cmsh /root/.cm/cmsh/si.cmsh
 cp dp.cmsh /root/.cm/cmsh/dp.cmsh
 cp ansible.cfg /root/.ansible.cfg
 
-# install the AWS CLI
-# unzip awscliv2.zip
-# ./aws/install
+install the AWS CLI
+unzip awscliv2.zip
+./aws/install
 
 # must use the system python to use Ansible's built-in yum/dnf
 export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python

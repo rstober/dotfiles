@@ -7,3 +7,9 @@
         src: "{{ installdir }}/jobs.tar.gz"
         dest: /cm/shared
         
+    - name: Creates a cron file under /etc/cron.d
+      ansible.builtin.cron:
+        name: Attempt to submit jobs every one minute
+        minute: "*"
+        user: root
+        job: "BASH_ENV=~/.bashrc bash -l -c \"/cm/shared/jobs/submit-load --cron --sjobs 10 >> /cm/shared/jobs/root-cron-submit-load.log 2>&1\""
