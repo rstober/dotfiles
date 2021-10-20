@@ -41,24 +41,12 @@ unzip awscliv2.zip
 # must use the system python to use Ansible's built-in yum/dnf
 export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
 
-# install the jobs the users will run-yum-update
-ansible-playbook -ilocalhost, --flush-cache --extra-vars "installdir=$installdir"  ${installdir}/install-apps.yaml
-
 # dnf update the head node and the default software image
-ansible-playbook -ilocalhost, --flush-cache ${installdir}/run-yum-update.yaml
+#ansible-playbook -ilocalhost, --flush-cache ${installdir}/run-yum-update.yaml
 
 # must use the Bright python package to use the Bright collection
 export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
 ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-software-image.yaml
-
-# install B4DS into cloned software image
-export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
-ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-b4ds.yaml
-
-# # install gnome desktop in cloned software image
-ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-gnome-desktop.yaml
-
-export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
 
 # clone the default category -> cloned set to use cloned-image
 ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-and-update-category.yaml
@@ -66,7 +54,17 @@ ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-and-update-categ
 # assign cnode001..cnode004 to cloned category
 ansible-playbook -ilocalhost, --flush-cache ${installdir}/assign-nodes-to-category.yaml
 
+# install B4DS into cloned software image
+export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-b4ds.yaml
+
+# install gnome desktop in cloned software image
+ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-gnome-desktop.yaml
+
+# placeholder - power on nodes and gather facts
+
 # configure slurm-client overlay and slurm-client role
+export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
 ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-slurm.yaml
 
 # configure auto scaler
@@ -87,3 +85,8 @@ for user in robert david alice charlie edgar frank
 do
     ansible-playbook -ilocalhost, --flush-cache --extra-vars "user=$user pass=$pass" ${installdir}/add-user.yaml
 done
+
+# install the jobs the users will run-yum-update
+export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
+ansible-playbook -ilocalhost, --flush-cache --extra-vars "installdir=$installdir"  ${installdir}/install-apps.yaml
+
