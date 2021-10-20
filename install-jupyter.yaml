@@ -3,20 +3,27 @@
   gather_facts: true
   
   tasks:
-    
-    - name: Get info needed to modify the cloud director security group
-      brightcomputing.bcm.ec2_provider:
-        name: amazon
+  
+    - name: read all ec2 provider info
+      brightcomputing.bcm.ec2_provider_info:
       register: result
+
+    - name: set needed ec2_provider
+      set_fact:
+        aws_provider: "{{ result.ec2_providers | selectattr('name', 'equalto', 'amazon') | first }}"
+
+    - name: set needed vpc
+      set_fact:
+        vpc:  "{{ aws_provider.VPCs[0] }}"
       
-    - name: Get info needed to modify the cloud director security group
-      debug:
-        msg:
-          - "secGroupD: {{ result.VPCs[0].securityGroupDirector }}"
-          - "vpcID: {{ result.VPCs[0].vpcID }}"
-          - "accesskeyId: {{ result.accessKeyId }}"
-          - "accessKeySecret: {{ result.accessKeySecret }}"
-          - "region: {{ result.VPCs[0].region }}"
+    # - name: print out the info that has been collected
+      # debug:
+        # msg:
+          # - "secGroupD: {{ vpc.securityGroupDirector }}"
+          # - "vpcID: {{ vpc.vpcID }}"
+          # - "accesskeyId: {{ aws_provider.accessKeyId }}"
+          # - "accessKeySecret: {{ aws_provider.accessKeySecret }}"
+          # - "defaultRegion: {{ aws_provider.defaultRegion.name }}"
     
     - name: Create cm-jupyter-setup configuration file
       template:
@@ -30,29 +37,12 @@
         executable: /bin/bash
     
     - name: Open port 8000 on the (cloud) head node
-      ansible.builtin.shell: aws ec2 authorize-security-group-ingress --group-id {{ result.VPCs[0].securityGroupDirector }} --protocol tcp --port 8000 --cidr 0.0.0.0/0
+      ansible.builtin.shell: aws ec2 authorize-security-group-ingress --group-id {{ vpc.securityGroupDirector }} --protocol tcp --port 8000 --cidr 0.0.0.0/0
       args:
         executable: /bin/bash
       environment:
-        AWS_ACCESS_KEY_ID: "{{ result.accessKeyId }}"
-        AWS_SECRET_ACCESS_KEY: "{{ result.accessKeySecret }}"
-        AWS_DEFAULT_REGION: "{{ result.VPCs[0].region }}"
+        AWS_ACCESS_KEY_ID: "{{ aws_provider.accessKeyId }}"
+        AWS_SECRET_ACCESS_KEY: "{{ aws_provider.accessKeySecret }}"
+        AWS_DEFAULT_REGION: "{{ aws_provider.defaultRegion.name }}"
 
-    # - name: open port 8000 on the cloud director security group
-      # amazon.aws.ec2_group:
-        # name: "test"
-        # description: "Security group for head node in Bright COD-AWS cluster bug-demo"
-        # aws_access_key: "{{ result.accessKeyId }}"
-        # aws_secret_key: "{{ result.accessKeySecret }}"
-        # vpc_id: "{{ result.VPCs[0].vpcID }}"
-        # group_id: "{{ result.VPCs[0].securityGroupDirector }}"
-        # region: eu-west-1
-        # #region: "{{ result.VPCs[0].region }}"
-        # purge_rules: no
-        # purge_rules_egress: no
-        # rules:
-        # - proto: tcp
-          # ports:
-          # - 8000
-          # cidr_ip: 0.0.0.0/0
-          # rule_desc: allow access to Jupyter on port 8000
+  
