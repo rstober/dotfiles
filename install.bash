@@ -22,9 +22,6 @@ pip install ansible-base
 # install the brightcomputing.bcm collection
 ansible-galaxy collection install brightcomputing.bcm
 
-# install the Amazon collection
-#ansible-galaxy collection install amazon.aws
-
 # install
 cp cmshrc /root/.cmshrc
 cp bookmarks-cmsh /root/.bookmarks-cmsh
@@ -39,42 +36,43 @@ unzip awscliv2.zip
 ./aws/install
 
 # must use the system python to use Ansible's built-in yum/dnf
-export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
+#export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
 
 # dnf update the head node and the default software image
 #ansible-playbook -ilocalhost, --flush-cache ${installdir}/run-yum-update.yaml
 
 # must use the Bright python package to use the Bright collection
 export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
-ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-software-image.yaml
+ansible-playbook -ilocalhost, --flush-cache clone-software-image.yaml
 
 # clone the default category -> cloned set to use cloned-image
-ansible-playbook -ilocalhost, --flush-cache ${installdir}/clone-and-update-category.yaml
+ansible-playbook -ilocalhost, --flush-cache clone-and-update-category.yaml
 
 # assign cnode001..cnode004 to cloned category
-ansible-playbook -ilocalhost, --flush-cache ${installdir}/assign-nodes-to-category.yaml
+ansible-playbook -ilocalhost, --flush-cache assign-nodes-to-category.yaml
 
 # install B4DS into cloned software image
 export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
-ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-b4ds.yaml
+ansible-playbook -ilocalhost, --flush-cache install-b4ds.yaml
 
 # install gnome desktop in cloned software image
-ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-gnome-desktop.yaml
+ansible-playbook -ilocalhost, --flush-cache install-gnome-desktop.yaml
 
 # placeholder - power on nodes and gather facts
+export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
+ansible-playbook -ilocalhost, --flush-cache power-on-test.yaml
 
 # configure slurm-client overlay and slurm-client role
-export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
-ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-slurm.yaml
+ansible-playbook -ilocalhost, --flush-cache configure-slurm.yaml
 
 # configure auto scaler
-ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-auto-scaler.yaml
+ansible-playbook -ilocalhost, --flush-cache configure-auto-scaler.yaml
 
 # allow use of marketplace amis
-ansible-playbook -ilocalhost, --flush-cache ${installdir}/configure-usemarketplaceamis.yaml
+ansible-playbook -ilocalhost, --flush-cache configure-usemarketplaceamis.yaml
 
 # install Jupyter
-ansible-playbook -ilocalhost, --flush-cache ${installdir}/install-jupyter.yaml
+ansible-playbook -ilocalhost, --flush-cache install-jupyter.yaml
 
 # create a set of users
 pass=$(tr -cd '0-9a-zA-Z!@#$%^' < /dev/urandom | fold -w${1-32} | head -n1)
