@@ -6,10 +6,13 @@
       ansible.builtin.unarchive:
         src: "{{ installdir }}/jobs.tar.gz"
         dest: /cm/shared
-        
+    
+    # cron job that attempts to subjit jobs every minute
     - name: Creates a cron file under /etc/cron.d
       ansible.builtin.cron:
         name: Attempt to submit jobs every one minute
+        disabled: yes
+        state: present
         minute: "*"
         user: root
-        job: "#BASH_ENV=~/.bashrc bash -l -c \"/cm/shared/jobs/submit-load --cron --sjobs 10 >> /cm/shared/jobs/root-cron-submit-load.log 2>&1\""
+        job: "BASH_ENV=~/.bashrc bash -l -c \"/cm/shared/jobs/submit-load --cron --sjobs 10 >> /cm/shared/jobs/root-cron-submit-load.log 2>&1\""
