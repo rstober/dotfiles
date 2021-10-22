@@ -31,7 +31,7 @@
                     allowedResourceProviders: ['aws']
                     workloadsPerNode: 4
             engines_ScaleKubeEngine:
-              - name: default
+              - name: k8s
                 workloadsPerNode: 4
                 priority: 20
                 cluster: default
@@ -41,7 +41,5 @@
                     assignCategory: k8s
                     allowedResourceProviders: ['aws']
                     workloadsPerNode: 4
-                    
-                
- 
-                    
+
+                     
