@@ -7,6 +7,6 @@
       brightcomputing.bcm.user:
         name: "{{ user }}"
         password: "{{ pass }}"
+        homeDirOperation: true
         
- 
 
