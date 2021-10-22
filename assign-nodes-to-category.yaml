@@ -2,26 +2,26 @@
 - hosts: all
   gather_facts: false
   tasks:
-  - name: set cnode001 category -> cloned 
+  - name: set cnode001 category -> k8s 
     brightcomputing.bcm.cloud_node:
-      hostname: "cnode001"
-      category: "cloned"
-      powerControl: "cloud"
+      hostname: cnode001
+      category: k8s
+      powerControl: cloud
       
-  - name: set cnode002 category -> cloned 
+  - name: set cnode002 category -> jup 
     brightcomputing.bcm.cloud_node:
-      hostname: "cnode002"
-      category: "cloned"
-      powerControl: "cloud"
+      hostname: cnode002
+      category: jup
+      powerControl: cloud
       
   - name: set cnode003 category -> cloned 
     brightcomputing.bcm.cloud_node:
-      hostname: "cnode003"
-      category: "cloned"
-      powerControl: "cloud"
+      hostname: cnode003
+      category: cloned
+      powerControl: cloud
       
   - name: set cnode004 category -> cloned 
     brightcomputing.bcm.cloud_node:
-      hostname: "cnode004"
-      category: "cloned"
-      powerControl: "cloud"
+      hostname: cnode004
+      category: cloned
+      powerControl: cloud
