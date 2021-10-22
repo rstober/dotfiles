@@ -3,6 +3,7 @@
 #set -xv
 
 installdir=/root/.road-runner
+ansible_version='2.10.*'
 
 if [ ! -d $installdir ]; then
     mkdir -p $installdir
@@ -17,7 +18,7 @@ git clone https://github.com/rstober/dotfiles.git $installdir
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 
 module load python3
-pip install ansible-base
+pip install ansible==${ansible_version}
 
 # install the brightcomputing.bcm collection
 ansible-galaxy collection install brightcomputing.bcm

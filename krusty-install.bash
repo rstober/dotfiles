@@ -3,6 +3,7 @@
 #set -xv
 
 installdir=/root/.road-runner
+ansible_version='2.10.*'
 
 if [ ! -d $installdir ]; then
     mkdir -p $installdir
@@ -14,10 +15,8 @@ yum install -y git
 
 git clone https://github.com/rstober/dotfiles.git $installdir
 
-#curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-
 module load python3
-pip install ansible-base
+pip install ansible==${ansible_version}
 
 # install the brightcomputing.bcm collection
 ansible-galaxy collection install brightcomputing.bcm
@@ -55,6 +54,7 @@ ansible-playbook -ilocalhost, --flush-cache ${installdir}/krusty-install-gnome-d
 export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
 
 # clone the default category -> cloned set to use cloned-image
+# nodes have to be powered off for thsi to work
 ansible-playbook -ilocalhost, --flush-cache ${installdir}/krusty-clone-and-update-category.yaml
 
 # assign cnode001..cnode004 to cloned category
@@ -72,8 +72,11 @@ ansible-playbook -ilocalhost, --flush-cache ${installdir}/krusty-install-jupyter
 # install the jobs the users will run-yum
 ansible-playbook -ilocalhost, --flush-cache --extra-vars "installdir=$installdir"  ${installdir}/install-apps.yaml
 
+pass=$(tr -cd '0-9a-zA-Z!@#$%^' < /dev/urandom | fold -w${1-32} | head -n1)
+echo $pass > /root/.userpassword
+chmod 400 /root/.userpassword
 # create a set of users
 for user in robert david alice charlie edgar frank
 do
-    ansible-playbook -ilocalhost, --flush-cache --extra-vars "username=$user pass=6b3rl1n5 prof=cloudjob" ${installdir}/add-user.yaml
+    ansible-playbook -ilocalhost, --flush-cache --extra-vars "user=$user pass=$pass" ${installdir}/add-user.yaml
 done
