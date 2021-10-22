@@ -21,12 +21,16 @@
       # debug:
         # msg:
           # - "cmsh_output: {{ cmsh_output }}"
-         
+    
+    # wait 120 seconds before polling
+    # then the wait_for command waits for 300 seconds more    
     - name: wait for cnode001 to come up
       wait_for:
         port: 8081
         host: cnode001
-        
+        delay: 120
+    
+    # start polling immediately on the rest of the nodes    
     - name: wait for cnode002 to come up
       wait_for:
         port: 8081
