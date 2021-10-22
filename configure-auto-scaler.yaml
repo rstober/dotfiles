@@ -1,31 +1,29 @@
 ---
 - hosts: all
   gather_facts: false
-  collections:
-    - brightcomputing.bcm
 
   tasks:     
     - name: configure auto-scaler
       brightcomputing.bcm.configuration_overlay:
-        name: "auto-scaler"
+        name: auto-scaler
         allHeadNodes: true
         roles_ScaleServerRole:
-          - name: "scaleserver"
+          - name: scaleserver
             runInterval: 60
             debug: true
             resourceProviders_ScaleDynamicNodesProvider:
               - name: "aws"
-                templateNode: "cnode001"
-                nodeRange: "cnode002..cnode004"
-                networkInterface: "eth0"
+                templateNode: cnode003
+                nodeRange: cnode003..cnode006
+                networkInterface: eth0
                 defaultResources: ['cpus=4','mem_free:slurm=16GB','gpu_free:t4:slurm=1']
             engines_ScaleHpcEngine:
-              - name: "slurm"
+              - name: slurm
                 workloadsPerNode: 4
-                wlmCluster: "slurm"
+                wlmCluster: slurm
                 trackers_ScaleHpcQueueTracker:
-                  - name: "gpu"
-                    queue: "gpu"
+                  - name: gpu
+                    queue: gpu
                     primaryOverlays: ['slurm-client']
                     allowedResourceProviders: ['aws']
                     workloadsPerNode: 4
