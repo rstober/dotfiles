@@ -14,18 +14,34 @@
             resourceProviders_ScaleDynamicNodesProvider:
               - name: "aws"
                 templateNode: cnode003
+                startTemplateNode: false
+                stopTemplateNode: false
                 nodeRange: cnode003..cnode006
                 networkInterface: eth0
                 defaultResources: ['cpus=4','mem_free:slurm=16GB','gpu_free:t4:slurm=1']
             engines_ScaleHpcEngine:
               - name: slurm
                 workloadsPerNode: 4
+                priority: 10
                 wlmCluster: slurm
                 trackers_ScaleHpcQueueTracker:
                   - name: gpu
                     queue: gpu
-                    primaryOverlays: ['slurm-client']
+                    assignCategory: cloned
                     allowedResourceProviders: ['aws']
                     workloadsPerNode: 4
+            engines_ScaleKubeEngine:
+              - name: default
+                workloadsPerNode: 4
+                priority: 20
+                cluster: default
+                trackers_ScaleKubeNamespaceTracker:
+                  - name: default
+                    controllerNamespace: default
+                    assignCategory: k8s
+                    allowedResourceProviders: ['aws']
+                    workloadsPerNode: 4
+                    
+                
  
                     
