@@ -2,6 +2,10 @@
 
 #set -xv
 
+set -e
+
+ANSIBLE_VERSION='2.10.*'
+
 installdir=/root/.road-runner
 
 if [ ! -d $installdir ]; then
@@ -17,7 +21,7 @@ git clone https://github.com/rstober/dotfiles.git $installdir
 #curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 
 module load python3
-pip install ansible-base
+pip install ansible==${ANSIBLE_VERSION}
 
 # install the brightcomputing.bcm collection
 ansible-galaxy collection install brightcomputing.bcm
@@ -72,6 +76,7 @@ ansible-playbook -ilocalhost, --flush-cache ${installdir}/krusty-install-jupyter
 # install the jobs the users will run-yum
 ansible-playbook -ilocalhost, --flush-cache --extra-vars "installdir=$installdir"  ${installdir}/install-apps.yaml
 
+# FIXME: Store credentials somewhere else. 
 # create a set of users
 for user in robert david alice charlie edgar frank
 do
