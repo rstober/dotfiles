@@ -17,6 +17,14 @@
         overSubscribe: "yes:4"
         wlmCluster: "slurm"
         
+    - name: clone defq -> jup
+      brightcomputing.bcm.slurm_job_queue:
+        name: "jup"
+        cloneFrom: "defq"
+        defaultQueue: false
+        overSubscribe: "yes:4"
+        wlmCluster: "slurm"
+    
     - name: configure slurm-client overlay and slurmclient role
       brightcomputing.bcm.configuration_overlay:
         name: slurm-client
@@ -25,6 +33,28 @@
           - name: slurmclient
             wlmCluster: "slurm"
             queues: ['gpu']
+            socketsPerBoard: 1
+            coresPerSocket: 2
+            threadsPerCore: 2
+            slots: 4
+            realMemory: 15535
+            genericResources:
+              - name: "gpu"
+                alias: "gpu0"
+                file: "/dev/nvidia0"
+                type: "t4"
+                count: "1"  # must be a string
+                consumable: true
+                addToGresConfig: true
+                
+    - name: configure slurm-client overlay and slurmclient role
+      brightcomputing.bcm.configuration_overlay:
+        name: slurm-jupyter
+        categories: [ 'jup' ]
+        roles_SlurmClientRole:
+          - name: slurmclient
+            wlmCluster: "slurm"
+            queues: ['jup']
             socketsPerBoard: 1
             coresPerSocket: 2
             threadsPerCore: 2
