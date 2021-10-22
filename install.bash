@@ -92,5 +92,5 @@ done
 
 # install the jobs the users will run-yum-update
 export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
-ansible-playbook -ilocalhost, --flush-cache --extra-vars "installdir=$installdir" install-apps.yaml
+ansible-playbook -ilocalhost, --flush-cache --extra-vars install-apps.yaml
 
