@@ -44,12 +44,17 @@ unzip awscliv2.zip
 
 # must use the Bright python package to use the Bright collection
 export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
+
+# create software images
 ansible-playbook -ilocalhost, --flush-cache clone-software-image.yaml
 
-# clone the default category -> cloned set to use cloned-image
+# create and update categories
 ansible-playbook -ilocalhost, --flush-cache clone-and-update-category.yaml
 
-# assign cnode001..cnode004 to cloned category
+# assign nodes to categories
+# cnode001 -> k8s
+# cnode002 -> jup
+# cnode003..cnode004 -> cloned
 ansible-playbook -ilocalhost, --flush-cache assign-nodes-to-category.yaml
 
 # install B4DS into cloned software image
@@ -61,7 +66,7 @@ ansible-playbook -ilocalhost, --flush-cache install-gnome-desktop.yaml
 
 # placeholder - power on nodes and gather facts
 export ANSIBLE_PYTHON_INTERPRETER=/cm/local/apps/python3/bin/python
-ansible-playbook -ilocalhost, --flush-cache power-on-test.yaml
+ansible-playbook -ilocalhost, --flush-cache install-k8s.yaml
 
 # configure slurm-client overlay and slurm-client role
 ansible-playbook -ilocalhost, --flush-cache configure-slurm.yaml
@@ -82,10 +87,10 @@ chmod 400 /root/.userpassword
 
 for user in robert david alice charlie edgar frank
 do
-    ansible-playbook -ilocalhost, --flush-cache --extra-vars "user=$user pass=$pass" ${installdir}/add-user.yaml
+    ansible-playbook -ilocalhost, --flush-cache --extra-vars "user=$user pass=$pass" add-user.yaml
 done
 
 # install the jobs the users will run-yum-update
 export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python
-ansible-playbook -ilocalhost, --flush-cache --extra-vars "installdir=$installdir"  ${installdir}/install-apps.yaml
+ansible-playbook -ilocalhost, --flush-cache --extra-vars "installdir=$installdir" install-apps.yaml
 
