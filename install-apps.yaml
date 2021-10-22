@@ -1,10 +1,12 @@
 ---
 - hosts: all
+  vars_files:
+    - road-runner-vars.yaml
   gather_facts: false
   tasks:
     - name: Install user applications
       ansible.builtin.unarchive:
-        src: "{{ installdir }}/jobs.tar.gz"
+        src: "{{ install_dir }}/jobs.tar.gz"
         dest: /cm/shared
     
     # cron job that attempts to subjit jobs every minute
