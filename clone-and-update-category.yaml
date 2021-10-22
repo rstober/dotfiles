@@ -23,3 +23,14 @@
         name: k8s
         softwareImageProxy: 
           parentSoftwareImage: cloned-image
+          
+    - name: clone default category -> jup category
+      brightcomputing.bcm.category:
+        name: jup
+        cloneFrom: default
+        
+    - name: set jup category software image -> cloned-image
+      brightcomputing.bcm.category:
+        name: jup
+        softwareImageProxy: 
+          parentSoftwareImage: cloned-image
