@@ -12,3 +12,14 @@
         name: cloned
         softwareImageProxy: 
           parentSoftwareImage: cloned-image
+          
+    - name: clone default category -> k8s category
+      brightcomputing.bcm.category:
+        name: k8s
+        cloneFrom: default
+        
+    - name: set k8s category software image -> cloned-image
+      brightcomputing.bcm.category:
+        name: k8s
+        softwareImageProxy: 
+          parentSoftwareImage: cloned-image

@@ -1,0 +1,43 @@
+---
+- hosts: all
+  vars:
+    categories: k8s
+  gather_facts: true
+  
+  tasks:
+    # power on nodes
+    - name: power on nodes in cloned category
+      ansible.builtin.shell: 'cmsh -c "device power -c {{ categories }} on"'
+      args:
+        executable: /bin/bash
+      register: cmsh_output
+      until: "'PENDING' in cmsh_output.stdout"
+      failed_when: "'FAILED' in cmsh_output.stdout"
+      retries: 6
+      delay: 10
+      ignore_errors: true
+      
+    # - name: print out the info that has been collected
+      # debug:
+        # msg:
+          # - "cmsh_output: {{ cmsh_output }}"
+    
+    # wait 120 seconds before polling
+    # then the wait_for command waits for 300 seconds more    
+    - name: wait for cnode001 to come up
+      wait_for:
+        port: 8081
+        host: cnode001
+        delay: 120
+        
+    - name: Create cm-kubernetes-setup configuration file
+      ansible.builtin.template:
+        src: cm-kubernetes-setup.conf.template
+        dest: /root/cm-kubernetes-setup.conf
+        mode: 0644
+      
+    - name: Install Kubernetes using the bash shell
+      ansible.builtin.shell: cm-kubernetes-setup -c /root/cm-kubernetes-setup.conf
+      args:
+        executable: /bin/bash
+        
