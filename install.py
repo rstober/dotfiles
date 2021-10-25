@@ -51,7 +51,7 @@ if __name__ == '__main__':
     shutil.copyfile("dp.cmsh", "/root/.cm/cmsh/dp.cmsh")
     shutil.copyfile("ansible.cfg", "/root/.ansible.cfg")
     
-    if deploy_jupyter:
+    if dictionary["deploy_jupyter"]:
         # download the AWS CLI
         os.system("curl \"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip\" -o \"awscliv2.zip\"")
         shutil.unpack_archive(awscliv2.zip, install_dir, zip)
