@@ -36,6 +36,9 @@ if __name__ == '__main__':
     stream = open("install_config.yaml", 'r')
     dictionary = yaml.full_load(stream)
     
+    for key, value in dictionary.items():
+        print (key + " : " + str(value))
+    
     # # install ansible base
     # os.system('pip install ansible==' + dictionary["ansible_version"])
     
