@@ -56,6 +56,10 @@ if __name__ == '__main__':
     
     if dictionary["update_head_node"]:    
         os.environ['ANSIBLE_PYTHON_INTERPRETER'] = '/usr/bin/python'
-        os.system("ansible-playbook -ilocalhost, run-yum-update.yaml")
+        os.system("ansible-playbook -ilocalhost, dnf-update.yaml")
+        
+    if dictionary["categories"]:
+        for category in dictionary["categories"]:
+            print("category: " + category)
         
      
