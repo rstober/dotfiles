@@ -29,6 +29,8 @@ if __name__ == '__main__':
     
     os.system("curl \"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip\" -o \"awscliv2.zip\"")
     
+    print("loading modules")
+    
     exec(open('/cm/local/apps/environment-modules/4.5.3/Modules/default/init/python.py').read())
     module('load','python3')
     module('list')
