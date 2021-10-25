@@ -65,6 +65,6 @@ if __name__ == '__main__':
         
     if dictionary["categories"]:
         for category in dictionary["categories"]:
-            print("category: " + category.name)
+            print("category: " + category)
         
      
