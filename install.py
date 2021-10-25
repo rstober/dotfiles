@@ -1,6 +1,7 @@
 import yaml
 import os
 import shutil
+import glob
 
 install_dir = "/root/.road-runner"
 
@@ -27,7 +28,7 @@ if __name__ == '__main__':
     # install road-runner distribution
     os.system("git clone https://github.com/rstober/dotfiles.git %s" % install_dir)
     
-    filelist = glob.glob(os.path.join(install_dir), "*")
+    filelist = glob.glob(install_dir + '/*')
     for f in filelist:
         print(f)
     
