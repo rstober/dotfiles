@@ -1,0 +1,9 @@
+---
+
+install_dir: /root/.road-runner
+ansible_version: 2.10.*
+
+clone_software_image: yes
+cloned_software_image_name: 
+  - cloned-image
+  - test-image
