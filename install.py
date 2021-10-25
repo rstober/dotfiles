@@ -34,7 +34,7 @@ if __name__ == '__main__':
     module('load','python3')
     module('list')
     
-    os.system('pip install ansible==' + Dictionary["ansible_version"])
+    os.system('pip install ansible==' + dictionary["ansible_version"])
     
     # filelist = glob.glob(install_dir + '/*')
     # for f in filelist:
