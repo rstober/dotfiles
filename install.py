@@ -2,7 +2,6 @@ import yaml
 import os
 import shutil
 import glob
-from ansible.playbook import PlayBook
 
 install_dir = "/root/.road-runner"
 
