@@ -54,7 +54,7 @@ if __name__ == '__main__':
     if dictionary["deploy_jupyter"]:
         # download the AWS CLI
         os.system("curl \"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip\" -o \"awscliv2.zip\"")
-        shutil.unpack_archive(awscliv2.zip, install_dir, zip)
+        shutil.unpack_archive('awscliv2.zip', install_dir, 'zip')
     
     
     #print(dictionary["cloned_software_image_name"])
