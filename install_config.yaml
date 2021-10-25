@@ -1,6 +1,8 @@
 ---
 
 install_dir: /root/.road-runner
+update_head_node: no
+update_images: no
 ansible_version: 2.10.*
 
 clone_software_image: yes

@@ -2,6 +2,7 @@ import yaml
 import os
 import shutil
 import glob
+from ansible.playbook import PlayBook
 
 install_dir = "/root/.road-runner"
 
@@ -38,11 +39,8 @@ if __name__ == '__main__':
     
     # install the brightcomputing.bcm Ansible collection
     os.system("ansible-galaxy collection install brightcomputing.bcm")
-    
-    # filelist = glob.glob(install_dir + '/*')
-    # for f in filelist:
-        # print(f)
-    
+   
+    # copy the CMSH aliases, bookmarks and scriptlets to their proper locations
     shutil.copyfile("cmshrc", "/root/.cmshrc")
     shutil.copyfile("bookmarks-cmsh", "/root/.bookmarks-cmsh")
     shutil.copyfile("du.cmsh", "/root/.cm/cmsh/du.cmsh")
@@ -51,12 +49,14 @@ if __name__ == '__main__':
     shutil.copyfile("dp.cmsh", "/root/.cm/cmsh/dp.cmsh")
     shutil.copyfile("ansible.cfg", "/root/.ansible.cfg")
     
+    # download and install the AWS CLI if Jupyter is going to be deployed
     if dictionary["deploy_jupyter"]:
-        # download the AWS CLI
         os.system("curl \"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip\" -o \"awscliv2.zip\"")
         shutil.unpack_archive('awscliv2.zip', install_dir, 'zip')
+        os.system("./aws/install")
     
-    
-    #print(dictionary["cloned_software_image_name"])
-    # for key, value in dictionary.items():
-        # print (key + " : " + str(value))
+    if dictionary["update_head_node"]:    
+        os.environ['ANSIBLE_PYTHON_INTERPRETER'] = '/usr/bin/python'
+        os.system("ansible-playbook -ilocalhost, run-yum-update.yaml")
+        
+     
