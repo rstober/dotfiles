@@ -24,14 +24,14 @@ if __name__ == '__main__':
     # install road-runner distribution
     os.system("git clone https://github.com/rstober/dotfiles.git %s" % install_dir)
     
-    # read in client configuration
-    stream = open("install_config.yaml", 'r')
-    dictionary = yaml.full_load(stream)
-    
     # load the python3 module
     exec(open('/cm/local/apps/environment-modules/4.5.3/Modules/default/init/python.py').read())
     module('load','python3')
     module('list')
+    
+    # read in client configuration
+    stream = open("install_config.yaml", 'r')
+    dictionary = yaml.full_load(stream)
     
     # install ansible base
     os.system('pip install ansible==' + dictionary["ansible_version"])
@@ -52,6 +52,8 @@ if __name__ == '__main__':
     if dictionary["deploy_jupyter"]:
         os.system("curl \"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip\" -o \"awscliv2.zip\"")
         shutil.unpack_archive('awscliv2.zip', install_dir, 'zip')
+        os.chmod("aws/install", stat.S_IEXEC)
+        os.chmod("aws/dist/aws", stat.S_IEXEC)
         os.system("./aws/install")
     
     if dictionary["update_head_node"]:    
