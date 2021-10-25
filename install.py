@@ -2,6 +2,7 @@ import yaml
 import os
 import shutil
 import glob
+import stat
 
 install_dir = "/root/.road-runner"
 
