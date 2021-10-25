@@ -8,7 +8,7 @@ clone_software_image: yes
 
 software_images:
   - cloned-image
-  - 
+ 
 cloned_software_image_name: 
   - cloned-image
   
