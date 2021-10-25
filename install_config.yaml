@@ -6,4 +6,14 @@ ansible_version: 2.10.*
 clone_software_image: yes
 cloned_software_image_name: 
   - cloned-image
-  - test-image
+  
+categories:
+  - cloned
+  - gpu
+  - jup
+  
+deploy_jupyter: yes
+jupyterhub_server: b91-c83-demo
+jupyter_wlm_queue: jup
+jupyter_wlm_categories: jup
+jupyter_wlm_nodes:
