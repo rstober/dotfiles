@@ -16,8 +16,8 @@ if __name__ == '__main__':
     # # create the installation director
     # os.mkdir(install_dir)
     
-    # # always cd into install_dir
-    # os.chdir(install_dir)
+    # always cd into install_dir
+    os.chdir(install_dir)
     
     # # install git
     # os.system("yum install -y git")
