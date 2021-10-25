@@ -13,9 +13,15 @@ cloned_software_image_name:
   - cloned-image
   
 categories:
-  - cloned
-  - gpu
-  - jup
+  - name: cloned
+    clone_from: default
+    software_image: cloned-image
+  - name: k8s
+    clone_from: default
+    software_image: cloned_image
+  - name: jup
+    clone_from: default
+    software_image: cloned-image
   
 deploy_jupyter: yes
 jupyterhub_server: b91-c83-demo
